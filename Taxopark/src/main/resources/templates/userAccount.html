@@ -11,9 +11,18 @@
     <span th:text="${user.getFirstName()}"/>
     <span> </span>
     <span th:text="${user.getLastName()}"/>
+
     <br>
     <span> email : </span>
     <span th:text="${user.getEmail()}"/>
+
+    <br>
+    <span> car : </span>
+    <span th:text="${car.getModel()}"/>
+
+    <br>
+    <span> tariff : </span>
+    <span th:text="${tariff.getId()}"/>
 
     <form action="/auth/logout" method="POST">
         <button type="submit">Logout</button>
