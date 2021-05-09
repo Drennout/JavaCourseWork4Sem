@@ -1,6 +1,7 @@
 package rest.taxopark.model.entites;
 
 import lombok.Data;
+import org.thymeleaf.extras.java8time.util.TemporalArrayUtils;
 
 import javax.persistence.*;
 
@@ -9,13 +10,25 @@ import javax.persistence.*;
 @Table (name = "users")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "login")
-    private String login;
-
     @Column(name = "password")
     private String pass;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "firts_name")
+    private String firstName;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "car_id")
+    private Long carId;
+
+    @Column(name = "tariff_id")
+    private Long tariffId;
 }
