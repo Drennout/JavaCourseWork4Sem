@@ -1,10 +1,22 @@
 <!DOCTYPE html>
+
+<!--xmlns:th="http://www.thymeleaf.org"-->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Account</title>
 </head>
 <body>
-$END$
+    <span> name : </span>
+    <span th:text="${user.getFirstName()}"/>
+    <span> </span>
+    <span th:text="${user.getLastName()}"/>
+    <br>
+    <span> email : </span>
+    <span th:text="${user.getEmail()}"/>
+
+    <form action="/auth/logout" method="POST">
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>
