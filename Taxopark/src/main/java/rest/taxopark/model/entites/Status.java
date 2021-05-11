@@ -1,2 +1,6 @@
-package rest.taxopark.model.entites;public class Status {
+package rest.taxopark.model.entites;
+
+public enum Status {
+    ACTIVE,
+    BANNED;
 }

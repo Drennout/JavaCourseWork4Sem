@@ -24,4 +24,9 @@ public class UserService {
         return userRepo.findByEmail(email).get();
     }
 
+    public boolean saveUpdateUser(User updateUser){
+        userRepo.save(updateUser);
+        return true;
+    }
+
 }

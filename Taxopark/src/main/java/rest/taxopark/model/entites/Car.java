@@ -16,10 +16,4 @@ public class Car {
 
     @Column(name = "model")
     private String model;
-
-    @Column(name = "year")
-    private Date year;
-
-    @Column(name = "mileage")
-    private int mileage;
 }

@@ -24,7 +24,23 @@
     <span> tariff : </span>
     <span th:text="${tariff.getId()}"/>
 
-    <form action="/auth/logout" method="POST">
+    <br>
+    <br>
+<!--    <a th:href="@{/user/account/edit/person}">Edit person data</a>-->
+    <form action="/user/account/edit/person" method="GET">
+        <button type="submit">Edit Personal Data</button>
+    </form>
+
+    <form action="/user/account/edit/tariff" method="GET">
+        <button type="submit">Edit Tariff</button>
+    </form>
+
+    <form action="/user/account/edit/car" method="GET">
+        <button type="submit">Edit Car</button>
+    </form>
+
+    <br>
+    <form action="/" method="GET">
         <button type="submit">Logout</button>
     </form>
 </body>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EditCar</title>
+</head>
+<body>
+<div>
+    <div>
+        <p>
+            <span>Your car: </span>
+            <span th:text="${currentCar.getModel()}"/>
+        </p>
+    </div>
+    <form class="form-signin" method="post" action="/user/account/edit/car">
+        <h2 class="form-signin-heading">Update</h2>
+        <div th:each="c: ${cars}">
+            <p>
+                <label for="carId" th:text="${c.getModel()}"/>
+                <input type="radio" id="carId" name="carId" th:value="${c.getId()}">
+            </p>
+        </div>
+        <button  type="submit">Update</button>
+    </form>
+</div>
+</body>
+</html>

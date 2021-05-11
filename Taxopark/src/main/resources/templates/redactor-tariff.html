@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EditTariff</title>
+</head>
+<body>
+  <div>
+    <div>
+      <p>
+        <span>Your tariff number: </span>
+        <span th:text="${currentTariff.getId()}"/>
+      </p>
+    </div>
+    <form class="form-signin" method="post" action="/user/account/edit/tariff">
+      <h2 class="form-signin-heading">Update</h2>
+      <div th:each="t: ${tariffs}">
+        <p>
+          <label for="tar" th:text="${t.getId()}"/>
+          <input type="radio" id="tar" name="tar" th:value="${t.getId()}">
+        <p>
+            <span>Commission percent: </span>
+            <span th:text="${t.getComPer()}"/>
+        </p>
+        <p>
+          <span>Car rent: </span>
+          <span th:text="${t.getCarRent()}"/>
+        </p>
+        <p>
+          <span>Aggregate rent: </span>
+          <span th:text="${t.getAggRent()}"/>
+        </p>
+        </p>
+      </div>
+      <button  type="submit">Update</button>
+    </form>
+  </div>
+</body>
+</html>
