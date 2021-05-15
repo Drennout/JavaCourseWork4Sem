@@ -16,8 +16,8 @@
       <h2 class="form-signin-heading">Update</h2>
       <div th:each="t: ${tariffs}">
         <p>
-          <label for="tar" th:text="${t.getId()}"/>
-          <input type="radio" id="tar" name="tar" th:value="${t.getId()}">
+          <label for="id" th:text="${t.getId()}"/>
+          <input type="radio" id="id" name="id" th:value="${t.getId()}">
         <p>
             <span>Commission percent: </span>
             <span th:text="${t.getComPer()}"/>

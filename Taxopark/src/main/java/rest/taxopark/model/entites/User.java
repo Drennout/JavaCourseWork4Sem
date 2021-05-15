@@ -26,9 +26,11 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "car_id")
-    private Long carId;
-
     @Column(name = "tariff_id")
     private Long tariffId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car", referencedColumnName = "id")
+    private Car car;
+
 }

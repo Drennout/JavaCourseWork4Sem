@@ -2,7 +2,6 @@ package rest.taxopark.model.entites;
 
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,4 +15,14 @@ public class Car {
 
     @Column(name = "model")
     private String model;
+
+    @Column(name = "belongs")
+    private boolean isBelongs;
+
+    @Column (name = "mileage")
+    private Long mileage;
+
+    @Column (name = "create_date")
+    private Date createDate;
+
 }
