@@ -43,4 +43,15 @@ public class AccountController {
         return "redirect:/user/account";
     }
 
+    @GetMapping("/car")
+    public String getEditCar(Model model){
+        model = acc.userAccountEditCarGet(model);
+        return "edit-car";
+    }
+
+    @PostMapping("car")
+    public String postEditCar(@RequestParam Long id){
+        acc.userAccountEditCarPost(id);
+        return "redirect:/user/account";
+    }
 }

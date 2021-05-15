@@ -6,11 +6,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import rest.taxopark.model.entites.Car;
 import rest.taxopark.model.entites.Tariff;
 import rest.taxopark.model.entites.User;
 import rest.taxopark.model.service.CarService;
 import rest.taxopark.model.service.TariffService;
 import rest.taxopark.model.service.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Data
@@ -23,6 +27,7 @@ public class AccountLogical {
 
     @Autowired
     private CarService carService;
+
     private Authentication auth;
 
     private User getUser(){
@@ -35,9 +40,15 @@ public class AccountLogical {
         return tariffService.getTariffById(getUser().getTariffId());
     }
 
+    private Car getCar(){
+        return getUser().getCar();
+    }
+
+
     public Model userAccount(Model model){
         model.addAttribute("user", getUser());
         model.addAttribute("tariff", getTariff());
+        model.addAttribute("car", getCar());
         return model;
     }
 
@@ -70,4 +81,45 @@ public class AccountLogical {
 
         userService.saveUpdateUser(user);
     }
+
+    public Model userAccountEditCarGet(Model model){
+        //access car to choosing
+        List<Car> cars = new ArrayList<>();
+        List<Long> carId = new ArrayList<>();
+
+        for (User u: userService.getAllUsers())
+            carId.add(u.getCar().getId());
+
+        for (Car car: carService.getAllCar()){
+            if (car.isBelongs()){
+                if (!carId.contains(car.getId()))
+                    cars.add(car);
+             }
+        }
+        System.out.println(carId.toString());
+        System.out.println(cars.toString());
+        Car car = new Car();
+        model.addAttribute("curCar", getUser().getCar());
+        model.addAttribute("cars", cars);
+        model.addAttribute("c", new Car());
+        return model;
+    }
+
+    public void userAccountEditCarPost(Long id){
+        User user = getUser();
+        user.setCar(carService.getCarById(id));
+
+        userService.saveUpdateUser(user);
+    }
+
+    // delete test
+    public List testCar(){
+        return userService.getAllUsers();
+    }
+
+    // delete test
+    public Car testUserCar(){
+        return getUser().getCar();
+    }
+
 }

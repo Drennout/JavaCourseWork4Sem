@@ -2,6 +2,8 @@ package rest.taxopark.model.entites;
 
 
 import lombok.Data;
+
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.util.Date;
 
