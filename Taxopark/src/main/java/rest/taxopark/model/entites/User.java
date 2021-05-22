@@ -1,7 +1,9 @@
 package rest.taxopark.model.entites;
 
 import lombok.Data;
-import org.thymeleaf.extras.java8time.util.TemporalArrayUtils;
+import lombok.Getter;
+import lombok.Setter;
+
 
 import javax.persistence.*;
 
@@ -32,5 +34,4 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car", referencedColumnName = "id")
     private Car car;
-
 }

@@ -7,6 +7,7 @@ import rest.taxopark.model.repository.UserRepository;
 
 import java.util.List;
 
+
 @Service
 public class UserService {
     @Autowired
@@ -15,6 +16,8 @@ public class UserService {
     public List<User> getAllUsers(){
         return userRepo.findAll();
     }
+
+
 
     public User getUserById(Long id){
         return userRepo.findById(id).get();

@@ -21,6 +21,10 @@
     <span th:text="${tariff.getId()}"/>
 
     <br>
+    <span> car : </span>
+    <span th:text="${car.getModel()}"/>
+
+    <br>
     <br>
 <!--    <a th:href="@{/user/account/edit/person}">Edit person data</a>-->
     <form action="/user/account/edit/person" method="GET">

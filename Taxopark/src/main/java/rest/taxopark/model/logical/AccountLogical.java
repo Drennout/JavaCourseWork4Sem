@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import rest.taxopark.model.entites.Car;
 import rest.taxopark.model.entites.Tariff;
 import rest.taxopark.model.entites.User;
@@ -13,8 +14,9 @@ import rest.taxopark.model.service.CarService;
 import rest.taxopark.model.service.TariffService;
 import rest.taxopark.model.service.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Component
 @Data
@@ -96,9 +98,6 @@ public class AccountLogical {
                     cars.add(car);
              }
         }
-        System.out.println(carId.toString());
-        System.out.println(cars.toString());
-        Car car = new Car();
         model.addAttribute("curCar", getUser().getCar());
         model.addAttribute("cars", cars);
         model.addAttribute("c", new Car());
@@ -107,11 +106,46 @@ public class AccountLogical {
 
     public void userAccountEditCarPost(Long id){
         User user = getUser();
-        user.setCar(carService.getCarById(id));
+        if(!user.getCar().isBelongs()){
+            Long delId = user.getCar().getId();
+            user.setCar(carService.getCarById(id));
+            userService.saveUpdateUser(user);
 
+            carService.deleteById(delId);
+            return;
+        }
+
+        user.setCar(carService.getCarById(id));
         userService.saveUpdateUser(user);
     }
 
+
+    public Model userAccountCarAddGet(Model model){
+        model.addAttribute("car", getCar());
+        if(getCar().isBelongs())
+            model.addAttribute("belongsMessage", "No");
+        else
+            model.addAttribute("belongsMessage", "Yes");
+        return model;
+    }
+
+    public void userAccountCarAddPost(String model, String regDate, Long mileage) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd", Locale.ENGLISH);
+        formatter.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+        Date date = formatter.parse(regDate);
+
+        Car car = new Car();
+        car.setBelongs(false);
+        car.setCreateDate(date);
+        car.setModel(model);
+        car.setMileage(mileage);
+
+        carService.save(car);
+
+        User user = getUser();
+        user.setCar(car);
+        userService.saveUpdateUser(user);
+    }
     // delete test
     public List testCar(){
         return userService.getAllUsers();

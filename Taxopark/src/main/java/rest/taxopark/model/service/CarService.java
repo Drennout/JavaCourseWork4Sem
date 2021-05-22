@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rest.taxopark.model.entites.Car;
 import rest.taxopark.model.entites.Tariff;
+import rest.taxopark.model.entites.User;
 import rest.taxopark.model.repository.CarRepository;
 
 import java.util.ArrayList;
@@ -25,5 +26,13 @@ public class CarService {
             cars.add(c);
 
         return cars;
+    }
+
+    public void save(Car car){
+        carRepo.save(car);
+    }
+
+    public void deleteById(Long id){
+        carRepo.deleteById(id);
     }
 }

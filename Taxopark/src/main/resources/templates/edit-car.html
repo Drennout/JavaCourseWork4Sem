@@ -18,17 +18,13 @@
             <p>
                 <label for="id" th:text="${c.getModel()}"/>
                 <input type="radio" id="id" name="id" th:value="${c.getId()}">
-<!--            <p>-->
-<!--                <span>Mileage: </span>-->
-<!--                <span th:text="${c.getMileage()}"/>-->
-<!--            </p>-->
-<!--            <p>-->
-<!--                <span>Year: </span>-->
-<!--                <span th:text="${c.getCreateDate()}"/>-->
-<!--            </p>-->
             </p>
         </div>
         <button  type="submit">Update</button>
+    </form>
+
+    <form action="/user/account/edit/car/add" method="get">
+        <button type="submit">Add your Car</button>
     </form>
 </div>
 </body>

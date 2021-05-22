@@ -2,6 +2,7 @@ package rest.taxopark.model.entites;
 
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.Date;
 @Data
 public class Car {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "model")
@@ -25,6 +26,7 @@ public class Car {
     private Long mileage;
 
     @Column (name = "create_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createDate;
 
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Registration</title>
+</head>
+<body>
+  <div>
+    <span>The condition your car now: </span>
+    <br>
+    <span>You are owner: </span>
+    <span th:text="${belongsMessage}"/>
+    <br>
+    <span>Model: </span>
+    <span th:text="${car.getModel()}"/>
+    <br>
+    <span>Date of issue: </span>
+    <span th:text="${car.getCreateDate()}"/>
+    <br>
+    <span>Mileage: </span>
+    <span th:text="${car.getMileage()}"/>
+    <span> kilometres</span>
+    <br>
+  </div>
+
+  <div class="container">
+    <form class="form-signin" method="post" action="/user/account/edit/car/add">
+      <h4 class="form-signin-heading">Add your car</h4>
+      <p>
+        <label for="model">Model</label>
+        <input type="text" id="model" name="model">
+      </p>
+
+      <p>
+        <label for="regDate">Date of registration</label>
+        <input type="date" id="regDate" name="regDate">
+      </p>
+
+      <p>
+        <label for="mileage">Mileage</label>
+        <input type="text" id="mileage" name="mileage">
+      </p>
+
+      <button  type="submit">Add car</button>
+    </form>
+  </div>
+</body>
+</html>
