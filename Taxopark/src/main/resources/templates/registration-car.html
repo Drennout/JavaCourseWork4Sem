@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Step 2</title>
+</head>
+<body>
+  <h4>Choose a car if You want to rent the car</h4>
+  <form class="form-signin" method="post" action="/registration/car">
+    <div th:each="c: ${cars}">
+      <p>
+        <label for="id" th:text="${c.getModel()}"/>
+        <input type="radio" id="id" name="id" th:value="${c.getId()}">
+      </p>
+    </div>
+    <button  type="submit">Next</button>
+  </form>
+
+  <h4>Or enter your car if You already have the car</h4>
+  <form class="form-signin" method="post" action="/registration/car/owner">
+    <h4 class="form-signin-heading">Add your car</h4>
+    <p>
+      <label for="model">Model</label>
+      <input type="text" id="model" name="model">
+    </p>
+
+    <p>
+      <label for="regDate">Date of registration</label>
+      <input type="date" id="regDate" name="regDate">
+    </p>
+
+    <p>
+      <label for="mileage">Mileage</label>
+      <input type="text" id="mileage" name="mileage">
+    </p>
+
+    <button  type="submit">Next</button>
+  </form>
+</body>
+</html>

@@ -31,7 +31,11 @@ public class User {
     @Column(name = "tariff_id")
     private Long tariffId;
 
+    @Column(name="earned")
+    private Long earned;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car", referencedColumnName = "id")
     private Car car;
+
 }

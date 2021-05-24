@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Step3</title>
+</head>
+<body>
+<form class="form-signin" method="post" action="/registration/tariff">
+  <h2 class="form-signin-heading">Choose tariff</h2>
+  <div th:each="t: ${tariffs}">
+    <p>
+      <label for="id" th:text="${t.getId()}"/>
+      <input type="radio" id="id" name="id" th:value="${t.getId()}">
+    <p>
+      <span>Commission percent: </span>
+      <span th:text="${t.getComPer()}"/>
+    </p>
+    <p>
+      <span>Car rent: </span>
+      <span th:text="${t.getCarRent()}"/>
+    </p>
+    <p>
+      <span>Aggregate rent: </span>
+      <span th:text="${t.getAggRent()}"/>
+    </p>
+    </p>
+  </div>
+  <button  type="submit">Create Account</button>
+</form>
+</body>
+</html>

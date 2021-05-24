@@ -68,11 +68,19 @@ public class AccountController {
     }
 
     @PostMapping("car/add")
-    public String postCarAdd(@RequestParam String model,
-                             @RequestParam String regDate,
-                             @RequestParam Long mileage) throws ParseException {
+        public String postCarAdd(@RequestParam String model,
+                                 @RequestParam String regDate,
+                                 @RequestParam Long mileage) throws ParseException {
 
         acc.userAccountCarAddPost(model, regDate, mileage);
+        return "redirect:/user/account";
+    }
+
+    @PostMapping("/person/pass")
+    public String postPersonPass(@RequestParam String oldPass,
+                                 @RequestParam String newPass,
+                                 @RequestParam String repeatPass){
+        acc.userAccountEditPass(oldPass,newPass,repeatPass);
         return "redirect:/user/account";
     }
 }

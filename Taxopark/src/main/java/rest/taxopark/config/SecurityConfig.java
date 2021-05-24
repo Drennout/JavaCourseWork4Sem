@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/test/**").permitAll()
+                .antMatchers("/registration/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -50,25 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/auth/login");
     }
 
-//    @Bean
-//    @Override
-//    protected UserDetailsService userDetailsService() {
-//        return new InMemoryUserDetailsManager(
-//                User.builder()
-//                    .username("admin")
-//                    .password(passwordEncoder().encode("admin"))
-//                    .roles(Role.ADMIN.name())
-//                    .build(),
-//                User.builder()
-//                    .username("user")
-//                    .password(passwordEncoder().encode("user"))
-//                    .roles(Role.USER.name())
-//                .build()
-//        );
-//    }
-
     @Bean
-    protected PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(12);
     }
 

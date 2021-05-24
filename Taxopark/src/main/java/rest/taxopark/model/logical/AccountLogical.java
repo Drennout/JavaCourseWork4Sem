@@ -4,9 +4,9 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
 import rest.taxopark.model.entites.Car;
 import rest.taxopark.model.entites.Tariff;
 import rest.taxopark.model.entites.User;
@@ -29,6 +29,9 @@ public class AccountLogical {
 
     @Autowired
     private CarService carService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private Authentication auth;
 
@@ -156,4 +159,22 @@ public class AccountLogical {
         return getUser().getCar();
     }
 
+    public boolean userAccountEditPass(String oldPass, String newPass, String repeatPass){
+        System.out.println(passwordEncoder.matches(oldPass, getUser().getPass()));
+        if(passwordEncoder.matches(oldPass, getUser().getPass())){
+            if(newPass.equals(repeatPass)){
+                if (!newPass.equals("")) {
+                    return false;
+                }
+                User user = getUser();
+                user.setPass(passwordEncoder.encode(newPass));
+                userService.saveUpdateUser(user);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
 }

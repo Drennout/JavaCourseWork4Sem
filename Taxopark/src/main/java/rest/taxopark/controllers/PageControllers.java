@@ -21,4 +21,9 @@ public class PageControllers {
         model = acc.userAccount(model);
         return "userAccount";
     }
+
+    @GetMapping("/registration")
+    public String getRegistration(){
+        return "registration";
+    }
 }
