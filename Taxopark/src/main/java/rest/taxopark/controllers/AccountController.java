@@ -4,15 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import rest.taxopark.model.entites.Car;
 import rest.taxopark.model.logical.AccountLogical;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-
 
 @Controller
 @RequestMapping("/user/account/edit")
@@ -30,9 +23,10 @@ public class AccountController {
     public String postRedactPage(
             @RequestParam String name,
             @RequestParam String email,
-            @RequestParam String lastname){
+            @RequestParam String lastname,
+            @RequestParam String bankCard){
 
-        acc.userAccountEditPersonPost(name, lastname, email);
+        acc.userAccountEditPersonPost(name, lastname, email, bankCard);
 
         return "redirect:/user/account";
     }
@@ -70,9 +64,10 @@ public class AccountController {
     @PostMapping("car/add")
         public String postCarAdd(@RequestParam String model,
                                  @RequestParam String regDate,
-                                 @RequestParam Long mileage) throws ParseException {
+                                 @RequestParam Long mileage,
+                                 @RequestParam String vin) throws ParseException {
 
-        acc.userAccountCarAddPost(model, regDate, mileage);
+        acc.userAccountCarAddPost(model, regDate, mileage, vin);
         return "redirect:/user/account";
     }
 
@@ -81,6 +76,12 @@ public class AccountController {
                                  @RequestParam String newPass,
                                  @RequestParam String repeatPass){
         acc.userAccountEditPass(oldPass,newPass,repeatPass);
+        return "redirect:/user/account";
+    }
+
+    @PostMapping("/write")
+    public String writeOffMoney(){
+        acc.writeOffMoney();
         return "redirect:/user/account";
     }
 }

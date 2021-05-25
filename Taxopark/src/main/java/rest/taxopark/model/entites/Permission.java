@@ -1,8 +1,8 @@
 package rest.taxopark.model.entites;
 
 public enum Permission {
-    READ("read"),
-    WRITE("write");
+    USER("user"),
+    ADMIN("admin");
 
     private final String permission;
 

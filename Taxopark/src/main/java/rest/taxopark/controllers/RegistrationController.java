@@ -25,9 +25,10 @@ public class RegistrationController {
     public String addPersonData(@RequestParam String name,
                                         @RequestParam String lastname,
                                         @RequestParam String email,
+                                        @RequestParam String bankCard,
                                         @RequestParam String password,
                                         @RequestParam String confPass){
-        user = rl.firstStep(name, lastname, email, password, confPass);
+        user = rl.firstStep(name, lastname, email, password, confPass, bankCard);
         return "redirect:/registration/car";
     }
 
@@ -46,8 +47,9 @@ public class RegistrationController {
     @PostMapping("registration/car/owner")
     public String addCarOwner(@RequestParam String model,
                               @RequestParam String regDate,
-                              @RequestParam Long mileage) throws ParseException {
-        car = rl.secondStepPostOwner(model, regDate, mileage);
+                              @RequestParam Long mileage,
+                              @RequestParam String vin) throws ParseException {
+        car = rl.secondStepPostOwner(model, regDate, mileage, vin);
         return "redirect:/registration/tariff";
     };
 

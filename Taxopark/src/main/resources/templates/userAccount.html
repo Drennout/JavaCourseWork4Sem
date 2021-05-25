@@ -15,11 +15,18 @@
     <br>
     <span> email : </span>
     <span th:text="${user.getEmail()}"/>
-
+    <br>
+    <form action="/user/account/edit/person" method="GET">
+        <button type="submit">Edit Personal Data</button>
+    </form>
     <br>
     <span> tariff : </span>
+    <br>
     <span th:text="${tariff.getId()}"/>
-
+    <br>
+    <form action="/user/account/edit/tariff" method="GET">
+        <button type="submit">Edit Tariff</button>
+    </form>
     <br>
     <span> car : </span>
     <span th:text="${car.getModel()}"/>
@@ -29,23 +36,20 @@
     <span> earned : </span>
     <span th:text="${user.getEarned()}"/>
     <br>
-    <br>
+    <span>You can write off money: </span>
+    <span th:text="${writeMoney}"/>
+    <form action="/user/account/edit/write" method="POST">
+        <button type="submit">Write</button>
+    </form>
 <!--    <a th:href="@{/user/account/edit/person}">Edit person data</a>-->
-    <form action="/user/account/edit/person" method="GET">
-        <button type="submit">Edit Personal Data</button>
-    </form>
-
-    <form action="/user/account/edit/tariff" method="GET">
-        <button type="submit">Edit Tariff</button>
-    </form>
 
     <form action="/user/account/edit/car" method="GET">
         <button type="submit">Edit Car</button>
     </form>
 
     <br>
-    <form action="/" method="GET">
-        <button type="submit">Logout</button>
+    <form th:action="@{/auth/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
     </form>
 </body>
 </html>

@@ -29,4 +29,6 @@ public class Car {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createDate;
 
+    @Column (name = "vin")
+    private String vin;
 }

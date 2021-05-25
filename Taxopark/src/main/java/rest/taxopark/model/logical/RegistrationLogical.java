@@ -29,7 +29,7 @@ public class RegistrationLogical {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User firstStep(String name, String lastname, String email, String password, String confPass){
+    public User firstStep(String name, String lastname, String email, String password, String confPass, String bankCard){
         if(password.equals(confPass)){
             User user = new User();
             user.setPass(passwordEncoder.encode(password));
@@ -37,6 +37,7 @@ public class RegistrationLogical {
             user.setFirstName(name);
             user.setLastName(lastname);
             user.setEarned(0l);
+            user.setCard(bankCard);
             return user;
         }
         else
@@ -61,7 +62,7 @@ public class RegistrationLogical {
         return model;
     }
 
-    public Car secondStepPostOwner(String model, String regDate, Long mileage) throws ParseException {
+    public Car secondStepPostOwner(String model, String regDate, Long mileage, String vin) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd", Locale.ENGLISH);
         formatter.setTimeZone(TimeZone.getTimeZone("America/New_York"));
         Date date = formatter.parse(regDate);
@@ -71,6 +72,7 @@ public class RegistrationLogical {
         car.setCreateDate(date);
         car.setModel(model);
         car.setMileage(mileage);
+        car.setVin(vin);
         return car;
     }
 

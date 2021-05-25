@@ -2,6 +2,7 @@ package rest.taxopark.model.logical;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,11 +50,13 @@ public class AccountLogical {
         return getUser().getCar();
     }
 
-
     public Model userAccount(Model model){
+        float earnedWithTaxes = (1 - (float)(getTariff().getAggRent() + getTariff().getComPer())/100)*getUser().getEarned()
+                - getTariff().getCarRent();
         model.addAttribute("user", getUser());
         model.addAttribute("tariff", getTariff());
         model.addAttribute("car", getCar());
+        model.addAttribute("writeMoney", earnedWithTaxes);
         return model;
     }
 
@@ -63,11 +66,12 @@ public class AccountLogical {
         return model;
     }
 
-    public void userAccountEditPersonPost(String name, String lastname, String email){
+    public void userAccountEditPersonPost(String name, String lastname, String email, String bankCard){
         User user = getUser();
         user.setEmail(email);
         user.setFirstName(name);
         user.setLastName(lastname);
+        user.setCard(bankCard);
 
         userService.saveUpdateUser(user);
     }
@@ -132,7 +136,7 @@ public class AccountLogical {
         return model;
     }
 
-    public void userAccountCarAddPost(String model, String regDate, Long mileage) throws ParseException {
+    public void userAccountCarAddPost(String model, String regDate, Long mileage, String vin) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd", Locale.ENGLISH);
         formatter.setTimeZone(TimeZone.getTimeZone("America/New_York"));
         Date date = formatter.parse(regDate);
@@ -142,6 +146,7 @@ public class AccountLogical {
         car.setCreateDate(date);
         car.setModel(model);
         car.setMileage(mileage);
+        car.setVin(vin);
 
         carService.save(car);
 
@@ -176,5 +181,11 @@ public class AccountLogical {
             }
         }
         return false;
+    }
+
+    public void writeOffMoney(){
+        User user = getUser();
+        user.setEarned(0l);
+        userService.saveUpdateUser(user);
     }
 }

@@ -23,6 +23,11 @@
             <input type="text" id="email" name="email" th:value="${user.getEmail()}">
         </p>
 
+        <p>
+            <label for="bankCard">Bank card number</label>
+            <input type="text" id="bankCard" name="bankCard" th:value="${user.getCard()}">
+        </p>
+
         <button  type="submit">Update</button>
     </form>
 

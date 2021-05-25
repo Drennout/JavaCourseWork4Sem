@@ -34,6 +34,18 @@ public class User {
     @Column(name="earned")
     private Long earned;
 
+    @Column(name = "bank_card")
+    private String card;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
+
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car", referencedColumnName = "id")
     private Car car;
