@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Cars</title>
 </head>
 <body>
-
+  <form action="/admin/cars/add" method="GET">
+    <button type="submit">Add new car</button>
+  </form>
+  <br>
+  <div th:each="c: ${cars}">
+    <span>Id: </span>
+    <span th:text="${c.getId()}"/>
+    <span> Model: </span>
+    <span th:text="${c.getModel()}"/>
+    <span> VIN: </span>
+    <span th:text="${c.getVin()}"/>
+    <span> </span>
+    <form th:action="@{/admin/cars/delete/{id}(id = ${c.getId()})}" th:method="post">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
 </body>
 </html>

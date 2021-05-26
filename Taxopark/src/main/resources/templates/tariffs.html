@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tariffs</title>
+</head>
+<body>
+<form action="/admin/tariffs/add" method="GET">
+  <button type="submit">Create new tariff</button>
+</form>
+  <div th:each="t: ${tariffs}">
+    <span>Id: </span>
+    <span th:text="${t.getId()}"/>
+    <span> Commission Percent: </span>
+    <span th:text="${t.getComPer()}"/>
+    <span> Aggregate Rent: </span>
+    <span th:text="${t.getAggRent()}"/>
+    <span> Car Rent: </span>
+    <span th:text="${t.getCarRent()}"/>
+    <form th:action="@{/admin/tariffs/delete/{id}(id = ${t.getId()})}" th:method="post">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
-import rest.taxopark.model.entites.Car;
-import rest.taxopark.model.entites.Tariff;
-import rest.taxopark.model.entites.User;
+import rest.taxopark.model.entites.*;
 import rest.taxopark.model.service.CarService;
 import rest.taxopark.model.service.TariffService;
 import rest.taxopark.model.service.UserService;
@@ -38,6 +36,8 @@ public class RegistrationLogical {
             user.setLastName(lastname);
             user.setEarned(0l);
             user.setCard(bankCard);
+            user.setRole(Role.USER);
+            user.setStatus(Status.BANNED);
             return user;
         }
         else

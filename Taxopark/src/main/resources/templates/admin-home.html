@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+  <div>
+    <p>
+      <span><h4>List of recently registered: </h4></span>
+      <div th:each="u: ${usersBanned}">
+        <span th:text="${u.getFirstName()}"/> <span> </span> <span th:text="${u.getLastName()}"/>
+      <form th:action="@{/admin/user/{id}/registered(id = ${u.getId()})}" method="GET">
+          <button type="submit">Check</button>
+      </form>
+      </div>
+
+      <br>
+
+      <span><h4>Choose user</h4></span>
+      <div th:each="u: ${users}">
+          <span th:text="${u.getFirstName()}"/> <span> </span> <span th:text="${u.getLastName()}"/>
+          <form th:action="@{/admin/user/{id}(id = ${u.getId()})}" method="GET">
+              <button type="submit">-></button>
+          </form>
+      </div>
+
+      <br>
+      <form action="/admin/cars" th:method="get">
+          <button type="submit">Manage cars</button>
+      </form>
+
+      <br>
+      <form action="/admin/tariffs" th:method="get">
+          <button type="submit">Manage tariffs</button>
+      </form>
+    </p>
+  </div>
+</body>
+</html>

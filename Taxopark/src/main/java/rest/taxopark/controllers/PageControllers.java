@@ -22,6 +22,14 @@ public class PageControllers {
         return "userAccount";
     }
 
+    @GetMapping("/redirect")
+    public String redirect(){
+        if(acc.redirectAuth())
+            return "redirect:/admin/";
+        else
+            return "redirect:/user/account";
+    }
+
     @GetMapping("/registration")
     public String getRegistration(){
         return "registration";

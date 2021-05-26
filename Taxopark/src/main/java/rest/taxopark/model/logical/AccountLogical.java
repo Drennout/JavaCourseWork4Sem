@@ -188,4 +188,12 @@ public class AccountLogical {
         user.setEarned(0l);
         userService.saveUpdateUser(user);
     }
+
+    public boolean redirectAuth(){
+        if(getUser().getRole().name().equals("ADMIN"))
+            return true;
+        else
+            return false;
+
+    }
 }
